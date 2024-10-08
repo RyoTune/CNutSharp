@@ -5,6 +5,10 @@ VisualStudioVersion = 17.9.34714.143
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CNutSharp.Library", "CNutSharp.Library\CNutSharp.Library.csproj", "{2E5F754B-B524-4F4F-8069-4DCCE5A22FCB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CNutSharp.CLI", "CNutSharp.CLI\CNutSharp.CLI.csproj", "{1929B59E-68AE-46BB-AD02-0DBF1C2FA22C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CNutSharp.Tests", "CNutSharp.Tests\CNutSharp.Tests.csproj", "{DAE9FC88-EDA5-49C3-9C97-3AF4DB4ECEF0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{2E5F754B-B524-4F4F-8069-4DCCE5A22FCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E5F754B-B524-4F4F-8069-4DCCE5A22FCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E5F754B-B524-4F4F-8069-4DCCE5A22FCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1929B59E-68AE-46BB-AD02-0DBF1C2FA22C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1929B59E-68AE-46BB-AD02-0DBF1C2FA22C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1929B59E-68AE-46BB-AD02-0DBF1C2FA22C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1929B59E-68AE-46BB-AD02-0DBF1C2FA22C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAE9FC88-EDA5-49C3-9C97-3AF4DB4ECEF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAE9FC88-EDA5-49C3-9C97-3AF4DB4ECEF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAE9FC88-EDA5-49C3-9C97-3AF4DB4ECEF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAE9FC88-EDA5-49C3-9C97-3AF4DB4ECEF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
