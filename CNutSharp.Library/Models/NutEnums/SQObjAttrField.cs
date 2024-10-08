@@ -1,0 +1,9 @@
+﻿namespace CNutSharp.Library.Models.NutEnums;
+
+public enum SQObjAttrField
+{
+    SQOBJECT_REF_COUNTED = 0x08000000,
+    SQOBJECT_NUMERIC = 0x04000000,
+    SQOBJECT_DELEGABLE = 0x02000000,
+    SQOBJECT_CANBEFALSE = 0x01000000,
+}
