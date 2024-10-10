@@ -28,7 +28,7 @@
     <None Update="Files\64\ackermann.cnut">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Files\64\ackermann.nut">
+    <None Update="Files\64\ackermann_c.nut">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
