@@ -1,16 +1,18 @@
-﻿namespace CNutSharp.Library.Models;
+﻿using Microsoft.Extensions.Logging;
+
+namespace CNutSharp.Library.Models;
 
 public class CNut
 {
-    public CNut(string file) : this(File.OpenRead(file))
+    public CNut(string file, ILogger? log = null) : this(File.OpenRead(file), log)
     {
     }
 
-    public CNut(Stream inStream)
+    public CNut(Stream inStream, ILogger? log = null)
     {
         using var br = new BinaryReader(inStream);
         Header = new NutHeader(br);
-        FuncMain = new NutFunction(br);
+        FuncMain = new NutFunction(br, log);
         End = new NutEnd(br);
     }
 
@@ -30,4 +32,6 @@ public class CNut
         FuncMain.Write(bw);
         End.Write(bw);
     }
+
+    public void Merge(CNut mergeNut) => FuncMain.Merge(mergeNut.FuncMain);
 }

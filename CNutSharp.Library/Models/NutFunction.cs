@@ -1,8 +1,9 @@
 ﻿using CNutSharp.Library.Models.NutFunctions;
+using Microsoft.Extensions.Logging;
 
 namespace CNutSharp.Library.Models;
 
-public class NutFunction
+public class NutFunction : IWrite
 {
     public SQObject SourceName;
     public SQObject Name;
@@ -27,8 +28,12 @@ public class NutFunction
     public NutFunctionInstructions Instructions;
     public NutFunctionFunctions Functions;
 
-    public NutFunction(BinaryReader br)
+    private readonly ILogger? _log;
+
+    public NutFunction(BinaryReader br, ILogger? log)
     {
+        _log = log;
+
         if (!NutUtils.ConfirmPart(br)) throw new Exception($"PART missing at position: {br.BaseStream.Position}");
         SourceName = new SQObject(br);
         Name = new SQObject(br);
@@ -65,7 +70,7 @@ public class NutFunction
         Instructions = new(this, (int)nInstructions, br);
 
         if (!NutUtils.ConfirmPart(br)) throw new Exception($"PART missing at position: {br.BaseStream.Position}");
-        Functions = new(this, (int)nFunctions, br);
+        Functions = new(this, (int)nFunctions, br, log);
 
         StackSize = br.ReadInt64();
         IsGenerator = br.ReadByte();
@@ -139,5 +144,27 @@ public class NutFunction
         writer.Write(StackSize);
         writer.Write(IsGenerator);
         writer.Write(VarParams);
+    }
+
+    public void WriteText(TextWriter writer)
+    {
+        throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// Merges <paramref name="inFunc"/> into the current function.
+    /// </summary>
+    /// <param name="inFunc">Function to merge in this function</param>
+    public void Merge(NutFunction inFunc)
+    {
+        foreach (var func in inFunc.Functions)
+        {
+            var replaceFuncIdx = Functions.FindIndex(x => x.Name.ValueString == func.Name.ValueString);
+            if (replaceFuncIdx != -1)
+            {
+                Functions[replaceFuncIdx] = func;
+                _log?.LogInformation("Replaced function {function}.", func.Name.ValueString);
+            }
+        }
     }
 }
