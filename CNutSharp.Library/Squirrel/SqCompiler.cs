@@ -26,7 +26,7 @@ public class SqCompiler
     /// <param name="inputFile">Input NUT file.</param>
     /// <param name="outputFile">Optional output CNUT file.</param>
     /// <returns>Whether compilation succeeded.</returns>
-    public async Task<bool> Compile(string inputFile, string? outputFile = null)
+    public async Task<bool> TryCompile(string inputFile, string? outputFile = null)
     {
         try
         {
