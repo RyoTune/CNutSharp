@@ -43,13 +43,13 @@ public class SqCompiler
             var err = proc.StandardError.ReadToEnd();
             if (proc.ExitCode != 0 || !File.Exists(outputFile))
             {
-                _log?.LogError($"Failed to compile file.\n{err}\nFile: {inputFile}", inputFile);
+                _log?.LogError("Failed to compile file.\n{error}\nFile: {inputFile}", err, inputFile);
                 return false;
             }
         }
         catch (Exception ex)
         {
-            _log?.LogError(ex, $"Failed to compile file.\nFile: {inputFile}", inputFile);
+            _log?.LogError(ex, "Failed to compile file.\nFile: {inputFile}", inputFile);
             return false;
         }
 
