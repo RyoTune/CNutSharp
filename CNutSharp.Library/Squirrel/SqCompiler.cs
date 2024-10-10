@@ -19,7 +19,14 @@ public class SqCompiler
         _compilerPath = compilerPath;
     }
 
-    public bool Compile(string inputFile, string? outputFile = null)
+    /// <summary>
+    /// Compiles a NUT file. If no output path is passed,
+    /// the compiled CNUT will placed next to the input file.
+    /// </summary>
+    /// <param name="inputFile">Input NUT file.</param>
+    /// <param name="outputFile">Optional output CNUT file.</param>
+    /// <returns>Whether compilation succeeded.</returns>
+    public async Task<bool> Compile(string inputFile, string? outputFile = null)
     {
         try
         {
@@ -30,20 +37,19 @@ public class SqCompiler
             }
 
             var startInfo = GetStartInfo(inputFile, outputFile);
-            var proc = Process.Start(startInfo);
-            proc!.WaitForExit();
+            var proc = Process.Start(startInfo) ?? throw new Exception("Failed to start compiler.");
+            await proc.WaitForExitAsync();
 
             var err = proc.StandardError.ReadToEnd();
-            var info = proc.StandardOutput.ReadToEnd();
             if (proc.ExitCode != 0 || !File.Exists(outputFile))
             {
-                _log?.LogError("Compilation likely failed.\nFile: {file}", inputFile);
+                _log?.LogError($"Failed to compile file.\n{err}\nFile: {inputFile}", inputFile);
                 return false;
             }
         }
         catch (Exception ex)
         {
-            _log?.LogError(ex, "Failed to compile file.\nFile: {file}", inputFile);
+            _log?.LogError(ex, $"Failed to compile file.\nFile: {inputFile}", inputFile);
             return false;
         }
 
@@ -55,6 +61,5 @@ public class SqCompiler
         {
             WorkingDirectory = Path.GetDirectoryName(outputFile),
             RedirectStandardError = true,
-            RedirectStandardOutput = true,
         };
 }
